@@ -1,12 +1,18 @@
 .SILENT:
+JUNITLIBS = ./lib/junit-4.12.jar:./lib/hamcrest-core-1.3.jar
+JUNITRUNNER = org.junit.runner.JUnitCore
 
 default: clean setup .java.class
 
-run-legacy:
-	java -cp ./out:./lib/junit-4.12.jar:./lib/hamcrest-core-1.3.jar com.blueskyline.characterisationtests.LegacyCrud
+run-legacy: default
+	java -cp ./out:$(JUNITLIBS) com.blueskyline.characterisationtests.LegacyCrud
 
-test-legacy:
-		java -cp ./out:./lib/junit-4.12.jar:./lib/hamcrest-core-1.3.jar org.junit.runner.JUnitCore com.blueskyline.characterisationtests.CharacterisationTestForLegacyCrud
+capture-legacy: default
+		java -cp ./out:.$(JUNITLIBS) com.blueskyline.characterisationtests.LegacyCrud > legacy_output.txt
+
+
+test-legacy: default
+		java -cp ./out:$(JUNITLIBS) $(JUNITRUNNER) com.blueskyline.characterisationtests.CharacterisationTestForLegacyCrud
 
 clean:
 	rm -rf ./out
@@ -15,4 +21,4 @@ setup:
 	mkdir out
 
 .java.class:
-	javac -cp ./lib/junit-4.12.jar:./lib/hamcrest-core-1.3.jar -d out *.java
+	javac -cp $(JUNITLIBS) -d out *.java

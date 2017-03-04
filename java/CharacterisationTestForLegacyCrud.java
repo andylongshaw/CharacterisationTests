@@ -8,6 +8,9 @@ public class CharacterisationTestForLegacyCrud
   @Test
   public void WeHaventBrokenAnything()
   {
+    String cannedOutput = "Wibble";
+    String capturedOutput = "Wobble";
 
+    assertEquals(cannedOutput, capturedOutput);
   }
 }
