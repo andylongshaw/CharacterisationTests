@@ -2,7 +2,7 @@
 
 default: clean setup .java.class
 
-run:
+run-legacy:
 	java -cp ./out com.blueskyline.characterisationtests.LegacyCrud
 
 clean:
