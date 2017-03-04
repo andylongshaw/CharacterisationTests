@@ -1,3 +1,5 @@
+package com.blueskyline.characterisationtests;
+
 public class LegacyCrud
 {
   public static void main(String[] args)
