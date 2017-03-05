@@ -9,6 +9,7 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.Scanner;
 
 public class CharacterisationTestForLegacyCrud
 {
@@ -25,17 +26,8 @@ public class CharacterisationTestForLegacyCrud
       Process process = Runtime.getRuntime().exec("java -cp ./out com.blueskyline.characterisationtests.LegacyCrud");
       process.waitFor();
 
-      BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
+      capturedOutput = new Scanner(process.getInputStream(), "utf-8").useDelimiter("\\z").next();
 
-      String line;
-      while ((line = reader.readLine()) != null)
-      {
-        if (!capturedOutput.equals(""))
-        {
-          capturedOutput += "\n";
-        }
-        capturedOutput += line;
-      }
     }
     catch (Exception ex)
     {
